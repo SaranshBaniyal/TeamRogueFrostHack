@@ -56,7 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Journal(models.Model):
     id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=30)
     entry = models.TextField()
     date = models.CharField(max_length=50)
     label = models.CharField(max_length=30)

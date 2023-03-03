@@ -5,7 +5,11 @@ from .serializers import UserSerializer, JournalSerializer
 from django.contrib.auth import authenticate
 import datetime
 from rest_framework.permissions import AllowAny
+from .models import Journal
 
+# from transformers import RobertaTokenizerFast, TFRobertaForSequenceClassification, pipeline
+import json
+import requests
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -34,7 +38,14 @@ def input(request):
     #add label to data as json and then pass
     request.data['date'] = str(datetime.date.today())  # Returns 2018-01-15
 
-    request.data['label'] = "Joy"
+    API_TOKEN = "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"
+    API_URL = "https://api-inference.huggingface.co/models/arpanghoshal/EmoRoBERTa"
+    headers = {"Authorization": f"Bearer {API_TOKEN}"}
+    entry = request.data.get('entry')
+    data = json.dumps(entry)
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+
+    request.data['label'] = response.json()[0][0]['label']
 
     serializer = JournalSerializer(data=request.data)
     if serializer.is_valid():
@@ -42,3 +53,30 @@ def input(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def output(request):
+    # username = request.data.get('username')
+    # date = request.data.get('date')
+    username = request.data.get('username')
+    # date = "2023-03-03"
+    date = request.data.get('date')
+
+    queryset = Journal.objects.filter(username=username, date=date)
+
+    data = list(queryset.values())
+    return Response(data)
+
+
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def emosense(request):
+    API_TOKEN = "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"
+    API_URL = "https://api-inference.huggingface.co/models/arpanghoshal/EmoRoBERTa"
+    headers = {"Authorization": f"Bearer {API_TOKEN}"}
+    data = json.dumps("I love winters")
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+
+    return Response(response.json()[0][0]['label'])
