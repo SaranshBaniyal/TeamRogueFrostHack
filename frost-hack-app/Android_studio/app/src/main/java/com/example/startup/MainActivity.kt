@@ -1,58 +1,84 @@
 package com.example.startup
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.startup.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import okio.IOException
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var next: Button
+    private val client = OkHttpClient.Builder()
+        .connectionSpecs(listOf(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
+        .build()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+            Log.d("MainActivity","Button Clicked")
 
-        setSupportActionBar(binding.toolbar)
+//            val jsonBody:String = """ "username", "johndoe", "date", "2023-03-03" """
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//            val headers = Headers.Builder()
+//                .add("Content-Type","application/json")
+//                .add("ngrok-skip-browser-warning", "abc")
+//                .build()
+//            val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
+//            val request = Request.Builder()
+//                .url("https://3ac5-152-58-108-241.in.ngrok.io/api/accounts/output/")
+//                .post(requestBody)
+//                .headers(headers)
+//                .build()
+//
+//            client.newCall(request).enqueue(object : Callback {
+//                override fun onResponse(call: Call, response: Response) {
+//                    Toast.makeText(baseContext,"response.body?.toString()",Toast.LENGTH_SHORT).show()
+//                }
+//
+//                override fun onFailure(call: Call, e: IOException) {
+//                    val errorMessage = e.message ?: "Unknown error"
+//                    runOnUiThread {
+//                        Log.e("MainActivity", "Network request failed: $errorMessage")
+//                        Toast.makeText(baseContext, "Network request failed: $errorMessage", Toast.LENGTH_LONG).show()
+//                    }
+//                }
+//            })
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+        val retrofitbuilder = Retrofit.Builder()
+            .baseUrl("https://3ac5-152-58-108-241.in.ngrok.io/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val myApi = retrofitbuilder.create(MyAPI::class.java)
+        val datalist: RecyclerView = findViewById(R.id.datalist)
+        datalist.layoutManager = LinearLayoutManager(this)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val user = User("johndoe", "2023-03-03")
+            val data = myApi.getData(user)
+            datalist.adapter = MyAdapter(data)
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 }
