@@ -53,3 +53,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.username
+
+class Journal(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=30, unique=True)
+    entry = models.TextField()
+    date = models.CharField(max_length=50)
+    label = models.CharField(max_length=30)

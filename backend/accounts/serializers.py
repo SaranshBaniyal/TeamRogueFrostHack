@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Journal
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,3 +13,9 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+class JournalSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Journal
+        fields = ('id', 'username', 'entry', 'date', 'label')
+        read_only_fields = ('id',)
