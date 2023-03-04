@@ -46,6 +46,7 @@ def input(request):
     response = requests.request("POST", API_URL, headers=headers, data=data)
 
     request.data['label'] = response.json()[0][0]['label']
+    # request.data['label'] = "test"
 
     serializer = JournalSerializer(data=request.data)
     if serializer.is_valid():
