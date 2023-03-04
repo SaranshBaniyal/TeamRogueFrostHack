@@ -1,5 +1,6 @@
 package com.example.startup
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -8,6 +9,7 @@ import android.widget.Toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -21,16 +23,17 @@ class DescriptionActivity : AppCompatActivity() {
         eddescription= findViewById(R.id.eddescription)
         edsave.setOnClickListener {
             val retrofitbuilder = Retrofit.Builder()
-                .baseUrl("https://1f60-152-58-108-67.in.ngrok.io")
+                .baseUrl(StoreObj.baseurl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
             val myApi = retrofitbuilder.create(MyAPI::class.java)
 
             GlobalScope.launch(Dispatchers.Main) {
-                var postob = postData("johndoe",eddescription.text.toString())
-                val data = myApi.postentry(postob)
-                Toast.makeText(baseContext,data.toString(),Toast.LENGTH_SHORT).show()
+                var postob = postData(StoreObj.username,eddescription.text.toString())
+                val data: Call<postRes> = myApi.postentry(postob)
+                val intent = Intent(this@DescriptionActivity,MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }

@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-//    private lateinit var next: Button
-//    private var plus=findViewById<Button>(R.id.edadd)
     private val client = OkHttpClient.Builder()
         .connectionSpecs(listOf(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
         .build()
@@ -48,11 +46,8 @@ class MainActivity : AppCompatActivity() {
 //        val datalist: RecyclerView = findViewById(R.id.datalist)
         binding.datalist.layoutManager = LinearLayoutManager(this)
 
-//        val sharedPref = applicationContext.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-//        val token = sharedPref.getString("username", "")
 
         GlobalScope.launch(Dispatchers.Main) {
-//            Log.d("Result", token.toString())
             val user = User(StoreObj.username, "2023-03-03")
             val data = myApi.getData(user)
             binding.datalist.adapter = MyAdapter(data)
