@@ -5,7 +5,6 @@ import "./login.module.css";
 import UserContext from "../UserContext";
 
 const Login = ({ onLogin }) => {
-  const { setUser } = useContext(UserContext);
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -34,44 +33,47 @@ const Login = ({ onLogin }) => {
         throw new Error("Invalid login credentials");
       }
       const data = await response.json();
-      setUser(data.username);
-      onLogin(data.token); // pass the token to the parent component
+      onLogin(loginData.username);
+      console.log(loginData.username);
       navigate("/");
-      localStorage.setItem("token", data.token);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="container">
-      <div className="innerbox">
+    <div className="login-page">
+      <div className="form">
         <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username">Username</label>
             <input
               type="text"
               name="username"
+              id="username"
               value={loginData.username}
               onChange={handleChange}
               required
+              autoComplee="off"
               placeholder="Enter username"
             />
           </div>
           <div>
-            <label htmlFor="password">Password</label>
             <input
               type="password"
               name="password"
+              id="password"
               value={loginData.password}
+              autoComplee="off"
               onChange={handleChange}
               required
               placeholder="Enter password"
             />
           </div>
           <div className="footer">
-            <button>Login</button>
+            <button type="submit" className="btn btn-primary btn-ghost">
+              Login
+            </button>
             <p>
               New to Emosense!!
               <span>

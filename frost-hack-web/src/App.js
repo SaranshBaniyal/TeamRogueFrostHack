@@ -7,26 +7,24 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Notes from "./components/notes";
 import UserContext from "./UserContext";
+import Notehistory from "./components/notehistory";
 
 const App = () => {
-  const [token, setToken] = useState(null);
+  // const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
   const handleLogin = (username) => {
     setUser(username);
   };
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
         <div className="App">
-          <Navbar isLoggedIn={token}></Navbar>
+          <Navbar username={user}></Navbar>
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route
@@ -34,8 +32,13 @@ const App = () => {
               exact
               element={<Login onLogin={handleLogin} />}
             />
-            <Route path="/signup" exact element={<Signup />} />
-            <Route path="/newnote" exact element={<Notes username={``} />} />
+            <Route
+              path="/signup"
+              exact
+              element={<Signup onLogin={handleLogin} />}
+            />
+            <Route path="/newnote" exact element={<Notes username={user} />} />
+            <Route path="/history" exact element={<Notehistory />} />
           </Routes>
         </div>
       </Router>

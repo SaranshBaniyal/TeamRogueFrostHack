@@ -11,34 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.navbar{
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  max-width: 1500px;
-  margin: 0 auto;
-  border-bottom: 1px solid #f2f2f2;
-}
-.navbar h1{
-  left: 0;
-}
-.navbar a{
-  margin-right: 5px;
-  text-decoration: none;
-  padding: 4px;
-}
-.as{
-position: absolute;
-right: 0;
-}
-.home-img{
-  position: absolute;
-}
-.Ab{
-  position: absolute;
-  right: 20;
-}
-
 .create {
   max-width: 400px;
   margin: 0 auto;
@@ -70,4 +42,53 @@ right: 0;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+}
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1b2430;
+  padding: 20px 80px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+}
+#navbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#navbar li{
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+}
+nav h1{
+  font-size: 30px;
+  margin-top: -7px;
+  margin-bottom: 2px;
+}
+#navbar li a{
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+#navbar li a:hover,
+#navbar li a.active{
+  color: #17cf97;
+}
+#navbar li a:hover::after,
+#navbar li a.active::after
+{
+  content: "";
+  width: 60%;
+  height: 2px;
+  background: #17cf97;
+  position: absolute;
+  bottom: -4px;
+  left:20px;
+
+}
+.mobile{
+  color: #fff;
 }
