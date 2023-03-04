@@ -19,7 +19,8 @@
             android:id="@+id/txttitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"/>
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <LinearLayout
             android:layout_marginTop="45dp"
@@ -33,7 +34,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:gravity="start"/>
+                android:gravity="start"
+                android:textColor="#000000"/>
 
             <TextView
                 style="@style/TextAppearance.AppCompat.Body1"
@@ -41,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:gravity="end"/>
+                android:gravity="end"
+                android:textColor="#000000"/>
 
         </LinearLayout>
 

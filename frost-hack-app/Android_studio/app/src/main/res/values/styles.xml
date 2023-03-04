@@ -13,7 +13,7 @@
     <item name="colorSecondaryVariant">#b1b1b1</item>
 
     <!-- Text colors -->
-    <item name="android:textColorPrimary">#1b2430</item>
+    <item name="android:textColorPrimary">#FFFFFF</item>
     <item name="android:textColorSecondary">#8b8b8b</item>
     <item name="android:textColorTertiary">#b1b1b1</item>
 
@@ -24,7 +24,7 @@
 <!-- Primary button style -->
 <style name="PrimaryButtonStyle" parent="Widget.MaterialComponents.Button">
     <item name="android:backgroundTint">#17cf97</item>
-    <item name="android:textColor">#ffffff</item>
+    <item name="android:textColor">#FFFFFF</item>
 </style>
     <!-- Primary color -->
     <color name="colorPrimary">#17cf97</color>
@@ -45,7 +45,7 @@
     <!-- EditText background color -->
     <color name="edittext_background">#F5F5F5</color>
     <!-- EditText text color -->
-    <color name="edittext_text_color">#1b2430</color>
+    <color name="edittext_text_color">#FFFFFF</color>
     <!-- EditText box stroke color -->
     <color name="edittext_box_stroke_color">#CCCCCC</color>
     <!-- EditText box background color -->
