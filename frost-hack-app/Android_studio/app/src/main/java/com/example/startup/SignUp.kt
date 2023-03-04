@@ -3,6 +3,7 @@ package com.example.startup
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.startup.databinding.ActivitySignUpBinding
@@ -59,18 +60,18 @@ class SignUp : AppCompatActivity() {
             .build()
 
         val request = Request.Builder()
-            .url(" https://3ac5-152-58-108-241.in.ngrok.io/api/accounts/signup/")
+            .url(" https://1f60-152-58-108-67.in.ngrok.io/api/accounts/signup/")
             .post(requestBody)
             .headers(headers)
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
-                // Handle successful response here
+//                Toast.makeText(baseContext,"Successful",Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                // Handle error response here
+//                Toast.makeText(baseContext,"Fail",Toast.LENGTH_SHORT).show()
             }
         })
 

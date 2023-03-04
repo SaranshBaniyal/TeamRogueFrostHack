@@ -7,7 +7,7 @@
 
     <EditText
         android:id="@+id/eddescription"
-        android:layout_width="399dp"
+        android:layout_width="365dp"
         android:layout_height="527dp"
         android:ems="10"
         android:gravity="start|top"

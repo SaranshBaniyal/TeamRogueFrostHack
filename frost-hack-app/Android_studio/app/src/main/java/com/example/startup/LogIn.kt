@@ -1,5 +1,6 @@
 package com.example.startup
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -18,7 +19,7 @@ import org.json.JSONTokener
 
 class LogIn : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+//    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityLogInBinding
     private lateinit var edusername: EditText
     private lateinit var edpassword: EditText
@@ -30,15 +31,17 @@ class LogIn : AppCompatActivity() {
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        edpassword = findViewById(R.id.edusername)
-        edpassword = findViewById(R.id.edpassword)
-        btLogin = findViewById(R.id.btLogin)
+//        edpassword = findViewById(R.id.edusername)
+//        edpassword = findViewById(R.id.edpassword)
+//        btLogin = findViewById(R.id.btLogin)
 
-        btLogin.setOnClickListener {
-            val username = edusername.text.toString()
-            val password = edpassword.text.toString()
+        binding.btLogin.setOnClickListener {
+            val username = binding.edusername.text.toString()
+            val password = binding.edpassword.text.toString()
 
-            logInFunc("johndoe","mypassword")
+//            val username ="johndoe"
+//            val password = "mypassword"
+            logInFunc(username,password)
         }
     }
 
@@ -52,13 +55,12 @@ class LogIn : AppCompatActivity() {
             .build()
 
         val headers = Headers.Builder()
-//            .add("Authorization", "Bearer <your_token>")
             .add("Content-Type", "application/json")
             .add("ngrok-skip-browser-warning", "abc")
             .build()
 
         val request = Request.Builder()
-            .url(" https://3ac5-152-58-108-241.in.ngrok.io/api/accounts/login/")
+            .url(" https://1f60-152-58-108-67.in.ngrok.io/api/accounts/login/")
             .post(requestBody)
             .headers(headers)
             .build()
@@ -66,10 +68,12 @@ class LogIn : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 // Handle successful response here
-                val jsonObject = JSONTokener(response.body.toString()).nextValue() as JSONObject
-                val success = jsonObject.getString("success")
-                if (success.equals("True"))
-                    Toast.makeText(baseContext, "success", Toast.LENGTH_SHORT).show()
+//                val jsonObject = JSONTokener(response.body.toString()).nextValue() as JSONObject
+//                val success = jsonObject.getString("success")
+//                if (success.equals("True"))
+//                    Toast.makeText(baseContext, "success", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@LogIn, MainActivity::class.java)
+                startActivity(intent)
             }
 
             override fun onFailure(call: Call, e: IOException) {
