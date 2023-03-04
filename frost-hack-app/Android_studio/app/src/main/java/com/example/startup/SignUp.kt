@@ -1,5 +1,6 @@
 package com.example.startup
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.startup.databinding.ActivitySignUpBinding
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.*
 import okio.IOException
 
@@ -55,11 +57,21 @@ class SignUp : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
-//                Toast.makeText(baseContext,"Successful",Toast.LENGTH_SHORT).show()
+                StoreObj.username = username
+                val intent = Intent(this@SignUp, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }
 
             override fun onFailure(call: Call, e: IOException) {
-//                Toast.makeText(baseContext,"Fail",Toast.LENGTH_SHORT).show()
+                val snackbar = Snackbar.make(binding.root, "Network Error", Snackbar.LENGTH_SHORT)
+                snackbar.setAction("Retry") {
+                    binding.edUserName.text.clear()
+                    binding.edpassword.text.clear()
+                    binding.edemail.text.clear()
+                    binding.edfullName.text.clear()
+                }
+                snackbar.show()
             }
         })
 

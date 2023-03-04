@@ -9,10 +9,10 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Emosense"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Startup"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
             android:name=".SplashScreenActivity"
@@ -32,13 +32,11 @@
         <activity
             android:name=".SignUp"
             android:exported="false"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/Theme.Startup.NoActionBar" />
+            android:label="@string/title_activity_sign_up" />
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Startup.NoActionBar">
+            android:label="Emosense">
 
 
             <meta-data
