@@ -48,7 +48,7 @@ class SignUp : AppCompatActivity() {
             .build()
 
         val request = Request.Builder()
-            .url(" https://1f60-152-58-108-67.in.ngrok.io/api/accounts/signup/")
+            .url("${StoreObj.baseurl}/api/accounts/signup/")
             .post(requestBody)
             .headers(headers)
             .build()

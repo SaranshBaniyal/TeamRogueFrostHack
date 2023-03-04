@@ -37,52 +37,25 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//            Log.d("MainActivity","Button Clicked")
-
-//            val jsonBody:String = """ "username", "johndoe", "date", "2023-03-03" """
-
-//            val headers = Headers.Builder()
-//                .add("Content-Type","application/json")
-//                .add("ngrok-skip-browser-warning", "abc")
-//                .build()
-//            val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
-//            val request = Request.Builder()
-//                .url("https://3ac5-152-58-108-241.in.ngrok.io/api/accounts/output/")
-//                .post(requestBody)
-//                .headers(headers)
-//                .build()
-//
-//            client.newCall(request).enqueue(object : Callback {
-//                override fun onResponse(call: Call, response: Response) {
-//                    Toast.makeText(baseContext,"response.body?.toString()",Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onFailure(call: Call, e: IOException) {
-//                    val errorMessage = e.message ?: "Unknown error"
-//                    runOnUiThread {
-//                        Log.e("MainActivity", "Network request failed: $errorMessage")
-//                        Toast.makeText(baseContext, "Network request failed: $errorMessage", Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            })
 
 
         val retrofitbuilder = Retrofit.Builder()
-            .baseUrl("https://1f60-152-58-108-67.in.ngrok.io")
+            .baseUrl(StoreObj.baseurl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val myApi = retrofitbuilder.create(MyAPI::class.java)
-        val datalist: RecyclerView = findViewById(R.id.datalist)
-        datalist.layoutManager = LinearLayoutManager(this)
+//        val datalist: RecyclerView = findViewById(R.id.datalist)
+        binding.datalist.layoutManager = LinearLayoutManager(this)
 
-        val sharedPref = applicationContext.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        val token = sharedPref.getString("username", "")
+//        val sharedPref = applicationContext.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+//        val token = sharedPref.getString("username", "")
 
         GlobalScope.launch(Dispatchers.Main) {
-            val user = User(token.toString(), "2023-03-03")
+//            Log.d("Result", token.toString())
+            val user = User(StoreObj.username, "2023-03-03")
             val data = myApi.getData(user)
-            datalist.adapter = MyAdapter(data)
+            binding.datalist.adapter = MyAdapter(data)
         }
 
         binding.edadd.setOnClickListener {

@@ -13,17 +13,16 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         binding.btnstart.setOnClickListener{
-            val sharedPref = applicationContext.getSharedPreferences(
-                "myPrefs", Context.MODE_PRIVATE)
-            val savedname = sharedPref.getString("username", null)
-            if (savedname != null) {
-                val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-            } else {
+
+//            if (StoreObj.username=="") {
                 val intent = Intent(this, LogIn::class.java)
-                    startActivity(intent)
-            }
+                startActivity(intent)
+//            } else {
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//            }
         }
     }
 }

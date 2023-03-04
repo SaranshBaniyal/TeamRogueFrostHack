@@ -27,9 +27,9 @@ class MyAdapter(val data: List<Mydata>): RecyclerView.Adapter<MyAdapter.MyViewHo
     }
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        var txttitle= itemView.findViewById<TextView>(R.id.txttitle)
-        var txtdescription= itemView.findViewById<TextView>(R.id.txtdescription)
-        var txtlabel= itemView.findViewById<TextView>(R.id.txtlabel)
+        var txttitle:TextView = itemView.findViewById(R.id.txttitle)
+        var txtdescription:TextView= itemView.findViewById(R.id.txtdescription)
+        var txtlabel:TextView= itemView.findViewById(R.id.txtlabel)
     }
 
 }

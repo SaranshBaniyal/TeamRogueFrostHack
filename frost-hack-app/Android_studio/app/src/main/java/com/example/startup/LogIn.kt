@@ -1,7 +1,9 @@
 package com.example.startup
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -60,7 +62,7 @@ class LogIn : AppCompatActivity() {
             .build()
 
         val request = Request.Builder()
-            .url(" https://1f60-152-58-108-67.in.ngrok.io/api/accounts/login/")
+            .url("${StoreObj.baseurl}/api/accounts/login/")
             .post(requestBody)
             .headers(headers)
             .build()
@@ -68,10 +70,18 @@ class LogIn : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 // Handle successful response here
-//                val jsonObject = JSONTokener(response.body.toString()).nextValue() as JSONObject
-//                val success = jsonObject.getString("success")
-//                if (success.equals("True"))
-//                    Toast.makeText(baseContext, "success", Toast.LENGTH_SHORT).show()
+                val ans:String = response.body!!.string()
+                Log.d("Result",ans)
+                val json = JSONObject(ans)
+                val success = json.getBoolean("success")
+
+                if (success){
+                    Log.d("Result",username)
+                    StoreObj.username = username
+                    val intent = Intent(this@LogIn, MainActivity::class.java)
+                    startActivity(intent)
+                }
+//                    Toast.makeText(this, "success.toString()", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call, e: IOException) {
