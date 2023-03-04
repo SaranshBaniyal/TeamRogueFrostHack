@@ -16,8 +16,10 @@ class MyAdapter(val data: List<Mydata>): RecyclerView.Adapter<MyAdapter.MyViewHo
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val datelist = data.map { it.date }
         val entrylist = data.map {it.entry}
+        val labellist = data.map {it.label}
         holder.txttitle.text= datelist[position]
         holder.txtdescription.text= entrylist[position]
+        holder.txtlabel.text= labellist[position]
     }
 
     override fun getItemCount(): Int {
@@ -27,6 +29,7 @@ class MyAdapter(val data: List<Mydata>): RecyclerView.Adapter<MyAdapter.MyViewHo
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         var txttitle= itemView.findViewById<TextView>(R.id.txttitle)
         var txtdescription= itemView.findViewById<TextView>(R.id.txtdescription)
+        var txtlabel= itemView.findViewById<TextView>(R.id.txtlabel)
     }
 
 }

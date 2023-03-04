@@ -1,5 +1,6 @@
 package com.example.startup
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var next: Button
+//    private var plus=findViewById<Button>(R.id.edadd)
     private val client = OkHttpClient.Builder()
         .connectionSpecs(listOf(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
         .build()
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val retrofitbuilder = Retrofit.Builder()
-            .baseUrl("https://3ac5-152-58-108-241.in.ngrok.io/")
+            .baseUrl("https://1f60-152-58-108-67.in.ngrok.io")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -79,6 +81,13 @@ class MainActivity : AppCompatActivity() {
             datalist.adapter = MyAdapter(data)
         }
 
+//        addnote=findViewById(R.id.edadd)
+
+//        plus.setOnClickListener {
+////            println("Hello")
+//            val intent = Intent(this, DescriptionActivity::class.java)
+//            startActivity(intent)
+//        }
 
     }
 }
