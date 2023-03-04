@@ -17,9 +17,9 @@ class MyAdapter(val data: List<Mydata>): RecyclerView.Adapter<MyAdapter.MyViewHo
         val datelist = data.map { it.date }
         val entrylist = data.map {it.entry}
         val labellist = data.map {it.label}
-        holder.txttitle.text= datelist[position]
-        holder.txtdescription.text= entrylist[position]
-        holder.txtlabel.text= labellist[position]
+        holder.txttitle.text= datelist[holder.bindingAdapterPosition]
+        holder.txtdescription.text= entrylist[holder.bindingAdapterPosition]
+        holder.txtlabel.text= labellist[holder.bindingAdapterPosition]
     }
 
     override fun getItemCount(): Int {
