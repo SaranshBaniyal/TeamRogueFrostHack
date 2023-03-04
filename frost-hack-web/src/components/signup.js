@@ -20,7 +20,7 @@ const Signup = ({ onLogin }) => {
   const handlesubmit = (event) => {
     event.preventDefault();
 
-    const apiUrl = "http://192.168.39.46:8000/api/accounts/signup/";
+    const apiUrl = "http://192.168.89.46:8000/api/accounts/signup/";
     fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -41,15 +41,17 @@ const Signup = ({ onLogin }) => {
       <div className="container mt-5">
         <div className="signup-content">
           <div className="signup-form">
-            <h2 className="form-title">Sign-up</h2>
+            <span className="signuptext">Signup</span>{" "}
             <form
               id="register-form"
               className="register-form"
               onSubmit={handlesubmit}
             >
+              <br />
+              <br />
               <div className="form-group">
                 <label htmlFor="name">
-                  <i className="zmdi zmdi-account material-icons-name"></i>
+                  <i class="zmdi zmdi-account-box"></i>
                 </label>
                 <input
                   type="text"
@@ -61,6 +63,7 @@ const Signup = ({ onLogin }) => {
                   onChange={handleChange}
                 />
               </div>
+              <br />
               <div className="form-group">
                 <label htmlFor="name">
                   <i className="zmdi zmdi-account material-icons-name"></i>
@@ -75,9 +78,10 @@ const Signup = ({ onLogin }) => {
                   onChange={handleChange}
                 />
               </div>
+              <br />
               <div className="form-group">
                 <label htmlFor="name">
-                  <i className="zmdi zmdi-account material-icons-name"></i>
+                  <i class="zmdi zmdi-email"></i>
                 </label>
                 <input
                   type="email"
@@ -89,9 +93,10 @@ const Signup = ({ onLogin }) => {
                   onChange={handleChange}
                 />
               </div>
+              <br />
               <div className="form-group">
                 <label htmlFor="name">
-                  <i className="zmdi zmdi-account material-icons-name"></i>
+                  <i class="zmdi zmdi-key"></i>
                 </label>
                 <input
                   type="password"
@@ -103,8 +108,9 @@ const Signup = ({ onLogin }) => {
                   onChange={handleChange}
                 />
               </div>
+              <br />
               <div className="footer">
-                <button>Signup</button>
+                <button className="signupbtn">Signup</button>
                 <p>
                   Already have an account?{" "}
                   <span>

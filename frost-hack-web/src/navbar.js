@@ -51,7 +51,7 @@ const Navbar = ({ username }) => {
             fill="white"
             stop-color="white"
           ></path>{" "}
-        </svg>{" "}
+        </svg>
         <h1 style={{ color: "white" }}>Emosense</h1>
       </a>
       <div className="as">
@@ -77,23 +77,21 @@ const Navbar = ({ username }) => {
                 </Link>
               </li>
               <li>
-                <Link>About</Link>
-              </li>
-              <li>
-                <Link>Contact us</Link>
-              </li>
-              <li>
                 <Link to="/history">Journal's history</Link>
               </li>
-              <span style={{ fontSize: "1.3rem", color: "white" }}>
-                Welcome, {userName}!
-              </span>
+              <li>
+                {" "}
+                <span style={{ fontSize: "1rem", color: "white" }}>
+                  Welcome, {userName}
+                </span>
+              </li>
+
               <button
                 style={{
                   color: "white",
                   backgroundColor: "#17cf97",
                   borderRadius: "8px",
-                  fontSize: "1.3rem",
+                  fontSize: "1rem",
                   padding: "5px",
                 }}
                 onClick={handleLogout}
@@ -111,7 +109,7 @@ const Navbar = ({ username }) => {
                     backgroundColor: "#17cf97",
                     borderRadius: "8px",
                     fontSize: "1.3rem",
-                    padding: "5px",
+                    padding: "5px 10px",
                   }}
                 >
                   <Link to="/login">Login</Link>
@@ -124,7 +122,7 @@ const Navbar = ({ username }) => {
                     backgroundColor: "#17cf97",
                     borderRadius: "8px",
                     fontSize: "1.3rem",
-                    padding: "5px",
+                    padding: "5px 10px",
                   }}
                 >
                   <Link to="/signup">Signup</Link>

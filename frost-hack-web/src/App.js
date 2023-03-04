@@ -8,6 +8,7 @@ import Signup from "./components/signup";
 import Notes from "./components/notes";
 import UserContext from "./UserContext";
 import Notehistory from "./components/notehistory";
+import Notfound from "./components/Notfound";
 
 const App = () => {
   // const [token, setToken] = useState(null);
@@ -38,7 +39,12 @@ const App = () => {
               element={<Signup onLogin={handleLogin} />}
             />
             <Route path="/newnote" exact element={<Notes username={user} />} />
-            <Route path="/history" exact element={<Notehistory />} />
+            <Route
+              path="/history"
+              exact
+              element={<Notehistory username={user} />}
+            />
+            <Route path="*" exact element={<Notfound />} />
           </Routes>
         </div>
       </Router>

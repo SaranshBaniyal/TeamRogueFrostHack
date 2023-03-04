@@ -8,7 +8,7 @@ const Notes = ({ username }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const apiUrl = "http://192.168.39.46:8000/api/accounts/input/";
+    const apiUrl = "http://192.168.89.46:8000/api/accounts/input/";
     const requestData = { username, entry: entry };
     fetch(apiUrl, {
       method: "POST",
@@ -20,7 +20,6 @@ const Notes = ({ username }) => {
       .then((response) => response.json(), alert("your journal is added"))
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
-
     setentry("");
   };
 
@@ -37,7 +36,18 @@ const Notes = ({ username }) => {
           onChange={handleInputChange}
           placeholder="Today's journal entry"
         ></textarea>
-        <button type="submit">Add journal entry</button>
+        <button
+          style={{
+            color: "white",
+            backgroundColor: "#17cf97",
+            borderRadius: "8px",
+            fontSize: "20px",
+            padding: "5px",
+          }}
+          type="submit"
+        >
+          Add journal entry
+        </button>
       </form>
     </div>
   );

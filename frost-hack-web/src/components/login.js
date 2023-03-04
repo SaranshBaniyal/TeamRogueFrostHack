@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = "http://192.168.39.46:8000/api/accounts/login/";
+    const apiUrl = "http://192.168.89.46:8000/api/accounts/login/";
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -44,7 +44,11 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login-page">
       <div className="form">
-        <h1>Login</h1>
+        <span className="Logintext">Login</span>
+        <br />
+        <br />
+        <br />
+        <br />
         <form className="login-form" onSubmit={handleSubmit}>
           <div>
             <input
@@ -58,6 +62,8 @@ const Login = ({ onLogin }) => {
               placeholder="Enter username"
             />
           </div>
+          <br />
+          <br />
           <div>
             <input
               type="password"
@@ -70,14 +76,18 @@ const Login = ({ onLogin }) => {
               placeholder="Enter password"
             />
           </div>
+          <br />
+          <br />
           <div className="footer">
-            <button type="submit" className="btn btn-primary btn-ghost">
+            <button type="submit" className="loginbtn">
               Login
             </button>
             <p>
               New to Emosense!!
               <span>
-                <Link to="/signup">Signup</Link>
+                <Link to="/signup" className="signuplink">
+                  Signup
+                </Link>
               </span>
             </p>
           </div>
