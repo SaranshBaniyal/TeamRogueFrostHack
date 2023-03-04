@@ -46,6 +46,7 @@ def input(request):
     response = requests.request("POST", API_URL, headers=headers, data=data)
 
     request.data['label'] = response.json()[0][0]['label']
+    # request.data['label'] = "test"
 
     serializer = JournalSerializer(data=request.data)
     if serializer.is_valid():
@@ -68,7 +69,14 @@ def output(request):
     return Response(data)
 
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def outputall(request):
+    username = request.data.get('username')
 
+    queryset = Journal.objects.filter(username=username).order_by('-date')
+    data = list(queryset.values())
+    return Response(data)
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

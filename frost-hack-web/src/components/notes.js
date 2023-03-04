@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 const Notes = ({ username }) => {
-  console.log(username + "hello");
-
   const [entry, setentry] = useState("");
   const handleInputChange = (event) => {
     setentry(event.target.value);
@@ -10,8 +8,8 @@ const Notes = ({ username }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const apiUrl = "192.168.39.46:8000/api/accounts/input/";
-    const requestData = { username, text: entry };
+    const apiUrl = "http://192.168.39.46:8000/api/accounts/input/";
+    const requestData = { username, entry: entry };
     fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -19,9 +17,11 @@ const Notes = ({ username }) => {
       },
       body: JSON.stringify(requestData),
     })
-      .then((response) => response.json())
+      .then((response) => response.json(), alert("your journal is added"))
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+
+    setentry("");
   };
 
   return (
@@ -36,7 +36,7 @@ const Notes = ({ username }) => {
           value={entry}
           onChange={handleInputChange}
           placeholder="Today's journal entry"
-        />
+        ></textarea>
         <button type="submit">Add journal entry</button>
       </form>
     </div>

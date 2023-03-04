@@ -1,68 +1,18 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// // import fetchfromapi from "../utilis/fetchfromapi";
-
-// const Signup = () => {
-//   const handlesubmit = () => {
-//     const apiUrl = "http://192.168.39.46:8000/api/accounts/signup/";
-
-// const userData = {
-//   username: "example_user",
-//   full_name: "example_name",
-//   email: "example_user@example.com",
-//   password: "example_password",
-// };
-
-//     fetch(apiUrl, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(userData),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => console.log(data))
-//       .catch((error) => console.error(error));
-//   };
-//   return (
-//     <div className="container">
-//       <div className="innerbox">
-//         <h1>signup</h1>
-//         <form onSubmit={handlesubmit}>
-//           <input type="text" placeholder="Enter username" />
-//           <input type="text" placeholder="Enter name" />
-//           <input type="email" placeholder="Enter your email id" />
-//           <input type="password" placeholder="Enter password" />
-//           <div className="footer">
-//             <button>Signup</button>
-//             <p>
-//               Already have an account?{" "}
-//               <span>
-//                 <Link to="/login">Login</Link>
-//               </span>
-//             </p>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Signup;
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signupimg from "../image/2.svg";
-const Signup = () => {
-  const [userData, setUserData] = useState({
+const Signup = ({ onLogin }) => {
+  const [signupdata, setSignupdata] = useState({
     username: "",
     full_name: "",
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setUserData({
-      ...userData,
+    setSignupdata({
+      ...signupdata,
       [event.target.name]: event.target.value,
     });
   };
@@ -71,31 +21,35 @@ const Signup = () => {
     event.preventDefault();
 
     const apiUrl = "http://192.168.39.46:8000/api/accounts/signup/";
-
     fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(signupdata),
     })
       .then((response) => response.json())
       .then((response) => console.log(response))
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+    navigate("/");
+    onLogin(signupdata.username);
   };
 
   return (
     <section className="signup">
       <div className="container mt-5">
         <div className="signup-content">
-          .
           <div className="signup-form">
             <h2 className="form-title">Sign-up</h2>
-            <form id="register-form" className="register-form">
+            <form
+              id="register-form"
+              className="register-form"
+              onSubmit={handlesubmit}
+            >
               <div className="form-group">
                 <label htmlFor="name">
-                  <i class="zmdi zmdi-account material-icons-name"></i>
+                  <i className="zmdi zmdi-account material-icons-name"></i>
                 </label>
                 <input
                   type="text"
@@ -103,47 +57,60 @@ const Signup = () => {
                   id="username"
                   autoComplete="off"
                   placeholder="Enter your Username "
-                  value={userData.username}
+                  value={signupdata.username}
                   onChange={handleChange}
                 />
               </div>
               <div className="form-group">
                 <label htmlFor="name">
-                  <i class="zmdi zmdi-account material-icons-name"></i>
+                  <i className="zmdi zmdi-account material-icons-name"></i>
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
+                  name="full_name"
+                  id="full_name"
                   autoComplete="off"
                   placeholder="Enter name"
-                  value={userData.full_name}
+                  value={signupdata.full_name}
                   onChange={handleChange}
                 />
               </div>
               <div className="form-group">
                 <label htmlFor="name">
-                  <i class="zmdi zmdi-account material-icons-name"></i>
+                  <i className="zmdi zmdi-account material-icons-name"></i>
                 </label>
                 <input
                   type="email"
-                  name="name"
-                  id="name"
+                  name="email"
+                  id="email"
                   autoComplete="off"
-                  placeholder="Enter your name "
+                  value={signupdata.email}
+                  placeholder="Enter your email "
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
                 <label htmlFor="name">
-                  <i class="zmdi zmdi-account material-icons-name"></i>
+                  <i className="zmdi zmdi-account material-icons-name"></i>
                 </label>
                 <input
-                  type="text"
-                  name="name"
-                  id="name"
+                  type="password"
+                  name="password"
+                  id="password"
                   autoComplete="off"
-                  placeholder="Enter your name "
+                  value={signupdata.password}
+                  placeholder="Enter your password "
+                  onChange={handleChange}
                 />
+              </div>
+              <div className="footer">
+                <button>Signup</button>
+                <p>
+                  Already have an account?{" "}
+                  <span>
+                    <Link to="/login">Login</Link>
+                  </span>
+                </p>
               </div>
             </form>
           </div>
