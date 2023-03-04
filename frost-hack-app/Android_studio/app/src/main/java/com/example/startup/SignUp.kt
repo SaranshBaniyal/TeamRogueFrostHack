@@ -13,30 +13,18 @@ class SignUp : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var edUserName: EditText
-    private lateinit var edemail: EditText
-    private lateinit var edpassword: EditText
-    private lateinit var edfull_name: EditText
-    private lateinit var btSignUp: Button
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        edUserName= findViewById(R.id.edUserName)
-        edfull_name= findViewById(R.id.edfull_name)
-        edemail= findViewById(R.id.edemail)
-        edpassword= findViewById(R.id.edpassword)
-        btSignUp= findViewById(R.id.btSignUp)
 
-        btSignUp.setOnClickListener {
-            val username=edUserName.text.toString()
-            val full_name=edfull_name.text.toString()
-            val email=edemail.text.toString()
-            val password=edpassword.text.toString()
+        binding.btSignUp.setOnClickListener {
+            val username=binding.edUserName.text.toString()
+            val full_name=binding.edfullName.text.toString()
+            val email= binding.edemail.text.toString()
+            val password=binding.edpassword.text.toString()
 
             signUpFunc(username,full_name,email,password);
         }

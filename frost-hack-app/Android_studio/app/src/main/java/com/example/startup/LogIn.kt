@@ -66,10 +66,10 @@ class LogIn : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 // Handle successful response here
-                val jsonObject = JSONTokener(response.body.toString()).nextValue() as JSONObject
-                val success = jsonObject.getString("success")
-                if (success.equals("True"))
-                    Toast.makeText(baseContext, "success", Toast.LENGTH_SHORT).show()
+//                val jsonObject = JSONTokener(response.body.toString()).nextValue() as JSONObject
+//                val success = jsonObject.getString("success")
+//                if (success.equals("True"))
+//                    Toast.makeText(baseContext, "success", Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call, e: IOException) {
