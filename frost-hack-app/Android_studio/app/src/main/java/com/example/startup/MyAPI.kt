@@ -12,5 +12,5 @@ interface MyAPI {
 
     @Headers("Content-Type: application/json", "ngrok-skip-browser-warning: abc")
     @POST("/api/accounts/input/")
-    fun postentry(postob: postData): Call<String>
+    suspend fun postentry(@Body postob: postData): Call<postRes>
 }

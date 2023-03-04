@@ -1,11 +1,14 @@
 package com.example.startup
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.startup.databinding.ActivitySignUpBinding
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.*
 import okio.IOException
 
@@ -13,30 +16,18 @@ class SignUp : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var edUserName: EditText
-    private lateinit var edemail: EditText
-    private lateinit var edpassword: EditText
-    private lateinit var edfull_name: EditText
-    private lateinit var btSignUp: Button
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        edUserName= findViewById(R.id.edUserName)
-        edfull_name= findViewById(R.id.edfull_name)
-        edemail= findViewById(R.id.edemail)
-        edpassword= findViewById(R.id.edpassword)
-        btSignUp= findViewById(R.id.btSignUp)
 
-        btSignUp.setOnClickListener {
-            val username=edUserName.text.toString()
-            val full_name=edfull_name.text.toString()
-            val email=edemail.text.toString()
-            val password=edpassword.text.toString()
+        binding.btSignUp.setOnClickListener {
+            val username=binding.edUserName.text.toString()
+            val full_name=binding.edfullName.text.toString()
+            val email= binding.edemail.text.toString()
+            val password=binding.edpassword.text.toString()
 
             signUpFunc(username,full_name,email,password);
         }
@@ -59,18 +50,28 @@ class SignUp : AppCompatActivity() {
             .build()
 
         val request = Request.Builder()
-            .url(" https://3ac5-152-58-108-241.in.ngrok.io/api/accounts/signup/")
+            .url("${StoreObj.baseurl}/api/accounts/signup/")
             .post(requestBody)
             .headers(headers)
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
-                // Handle successful response here
+                StoreObj.username = username
+                val intent = Intent(this@SignUp, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                // Handle error response here
+                val snackbar = Snackbar.make(binding.root, "Network Error", Snackbar.LENGTH_SHORT)
+                snackbar.setAction("Retry") {
+                    binding.edUserName.text.clear()
+                    binding.edpassword.text.clear()
+                    binding.edemail.text.clear()
+                    binding.edfullName.text.clear()
+                }
+                snackbar.show()
             }
         })
 

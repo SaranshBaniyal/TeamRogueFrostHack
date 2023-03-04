@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- Base application theme. -->
+<style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <item name="android:statusBarColor">#17cf97</item>
+    <!-- Primary brand colors -->
+    <item name="colorPrimary">#17cf97</item>
+    <item name="colorPrimaryDark">#1b2430</item>
+    <item name="colorPrimaryVariant">#1b2430</item>
+
+    <!-- Secondary brand colors -->
+    <item name="colorSecondary">#ffffff</item>
+    <item name="colorSecondaryVariant">#b1b1b1</item>
+
+    <!-- Text colors -->
+    <item name="android:textColorPrimary">#1b2430</item>
+    <item name="android:textColorSecondary">#8b8b8b</item>
+    <item name="android:textColorTertiary">#b1b1b1</item>
+
+    <!-- Button styles -->
+    <item name="buttonStyle">@style/PrimaryButtonStyle</item>
+</style>
+
+<!-- Primary button style -->
+<style name="PrimaryButtonStyle" parent="Widget.MaterialComponents.Button">
+    <item name="android:backgroundTint">#17cf97</item>
+    <item name="android:textColor">#ffffff</item>
+</style>
+    <!-- Primary color -->
+    <color name="colorPrimary">#17cf97</color>
+    <!-- Darker variant of the primary color -->
+    <color name="colorPrimaryDark">#12846c</color>
+    <!-- Lighter variant of the primary color -->
+    <color name="colorPrimaryLight">#56e3b0</color>
+
+    <!-- Accent color -->
+    <color name="colorAccent">#1b2430</color>
+
+    <!-- Background color -->
+    <color name="background_color">#FFFFFF</color>
+
+    <!-- Text color -->
+    <color name="text_color">#1b2430</color>
+
+    <!-- EditText background color -->
+    <color name="edittext_background">#F5F5F5</color>
+    <!-- EditText text color -->
+    <color name="edittext_text_color">#1b2430</color>
+    <!-- EditText box stroke color -->
+    <color name="edittext_box_stroke_color">#CCCCCC</color>
+    <!-- EditText box background color -->
+    <color name="edittext_box_background_color">#FFFFFF</color>
+</resources>
