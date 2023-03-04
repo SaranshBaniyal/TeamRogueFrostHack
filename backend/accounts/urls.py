@@ -8,5 +8,5 @@ urlpatterns = [
     path('output/', views.output, name='output'),
     path('outputall/', views.outputall, name='outputall'),
 
-    # path('emosense/', views.emosense, name='emosense'),
+    path('emosense/', views.emosense, name='emosense'),
 ]

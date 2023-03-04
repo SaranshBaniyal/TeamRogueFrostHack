@@ -68,20 +68,6 @@ def output(request):
     return Response(data)
 
 
-
-
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def emosense(request):
-#     API_TOKEN = "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"
-#     API_URL = "https://api-inference.huggingface.co/models/arpanghoshal/EmoRoBERTa"
-#     headers = {"Authorization": f"Bearer {API_TOKEN}"}
-#     data = json.dumps("I love winters")
-#     response = requests.request("POST", API_URL, headers=headers, data=data)
-
-#     return Response(response.json()[0][0]['label'])
-
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def outputall(request):
@@ -90,3 +76,14 @@ def outputall(request):
     queryset = Journal.objects.filter(username=username).order_by('-date')
     data = list(queryset.values())
     return Response(data)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def emosense(request):
+    API_TOKEN = "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"
+    API_URL = "https://api-inference.huggingface.co/models/arpanghoshal/EmoRoBERTa"
+    headers = {"Authorization": f"Bearer {API_TOKEN}"}
+    data = json.dumps("I love winters")
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+
+    return Response(response.json()[0][0]['label'])
