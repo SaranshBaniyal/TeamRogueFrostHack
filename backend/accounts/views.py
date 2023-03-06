@@ -35,7 +35,6 @@ def login(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def input(request):
-    #add label to data as json and then pass
     request.data['date'] = str(datetime.date.today())  # Returns 2018-01-15
 
     API_TOKEN = "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"
@@ -57,8 +56,7 @@ def input(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def output(request):
-    # username = request.data.get('username')
-    # date = request.data.get('date')
+   
     username = request.data.get('username')
     # date = "2023-03-03"
     date = request.data.get('date')
