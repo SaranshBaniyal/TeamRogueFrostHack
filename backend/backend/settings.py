@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'accounts',
-    'corsheaders',
+    # 'corsheaders',
     # 'transformers',
 ]
 
@@ -141,4 +141,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3001"]
+# CORS_ALLOWED_ORIGINS = ["http://localhost:3001"]
